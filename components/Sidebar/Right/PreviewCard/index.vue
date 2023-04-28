@@ -5,14 +5,14 @@
     :class="twitterBorderColor"
   >
     <h1
-      class="p-3 text-lg font-extrabold text-grey-900 border-b dark:text-white"
+      class="p-2 text-lg font-extrabold text-grey-900 border-b dark:text-white"
       :class="twitterBorderColor"
     >
       {{ props.title }}
     </h1>
     <slot> </slot>
     <div
-      class="p-3 text-sm text-blue-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-dim-300"
+      class="p-2 text-sm text-blue-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-dim-300"
       :class="defaultTransition"
     >
       show more

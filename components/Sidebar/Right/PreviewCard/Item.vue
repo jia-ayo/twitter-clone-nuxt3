@@ -1,9 +1,9 @@
 <template>
   <div
-    class="p-3 cursor-pointer border-b hover:bg-gray-100 dark:text-white dark:hover:bg-dim-300"
+    class="p-2 cursor-pointer border-b hover:bg-gray-100 dark:text-white dark:hover:bg-dim-300"
     :class="wrapperClasses"
   >
-    Item
+   <slot></slot>
   </div>
 </template>
 
