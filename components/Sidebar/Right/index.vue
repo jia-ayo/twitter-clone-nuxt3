@@ -24,12 +24,18 @@
               :alt="whoToFollow.name"
             />
             <div class="flex flex-col ml-2">
-              <h1 class="text-sm font-bold text-gray-900 dark:text-white">{{ whoToFollow.name }}</h1>
+              <h1 class="text-sm font-bold text-gray-900 dark:text-white">
+                {{ whoToFollow.name }}
+              </h1>
               <p class="text-xs text-gray-400">{{ whoToFollow.handle }}</p>
             </div>
           </div>
           <div class="flex h-full">
-            <button class="px-4 py-2 font-bold rounded-full bg-black text-xs text-white dark:text-black dark:bg-white">Follow</button>
+            <button
+              class="px-4 py-2 font-bold rounded-full bg-black text-xs text-white dark:text-black dark:bg-white"
+            >
+              Follow
+            </button>
           </div>
         </div>
       </SidebarRightPreviewCardItem>
@@ -63,9 +69,10 @@ const whoToFollowItems = ref([
     handle: "@JoeBiden",
     image: "https://picsum.photos/200/200",
   },
-{
+  {
     name: "Joe Biden",
     handle: "@JoeBiden",
     image: "https://picsum.photos/200/200",
-  },]);
+  },
+]);
 </script>
