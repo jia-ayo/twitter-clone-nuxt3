@@ -1,6 +1,8 @@
 import { getUserByUsername } from "~/server/dp/users";
 import bcrypt from "bcrypt";
-import { generateTokens } from "~/server/utils/jwt";
+import { generateTokens, sendRefreshToken  } from "~/server/utils/jwt";
+import { userTransformer } from "~/server/transformers/user";
+import { createRefresfToken } from "~/server/dp/refreshTokens";
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { username, password } = body;
@@ -26,14 +28,30 @@ export default defineEventHandler(async (event) => {
     );
   }
   // compare passwords
-  const doesPasswordMAtch = await bcrypt.compare(password, user.password);
+    const doesPasswordMAtch = await bcrypt.compare(password, user.password);
+    
+    if (!doesPasswordMAtch) {
+        return sendError(
+          event,
+          createError({
+            statusCode: 400,
+            statusMessage: "username or password is invalid",
+          })
+        );
+    }
   // generate tokens
   //access token
   //refresh token
-  const { accessToken, refreshToken } = generateTokens();
+    const { accessToken, refreshToken } = generateTokens(user);
+    
+    //save it inside db
+    await createRefresfToken({
+      token: refreshToken,
+      userId: user.id,
+    });
 
-  return {
-    user: user,
-    doesPasswordMAtch,
-  };
+    //add http only cookie
+    sendRefreshToken(event, refreshToken)
+
+  return { access_Token: accessToken, user: userTransformer(user) };
 });
