@@ -1,9 +1,11 @@
 <template>
   <div>
-    <MainSection title="Home" :loading="true"> content </MainSection>
+    <MainSection title="Home" :loading="loading">
+      this is our home page
+    </MainSection>
   </div>
 </template>
 
-<script setup></script>
-
-<style lang="scss" scoped></style>
+<script setup>
+const loading = ref(true);
+</script>
