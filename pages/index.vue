@@ -7,5 +7,5 @@
 </template>
 
 <script setup>
-const loading = ref(true);
+const loading = ref(false);
 </script>
