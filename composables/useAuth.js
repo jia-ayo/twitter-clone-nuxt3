@@ -1,17 +1,26 @@
 import useFetchApi from "./useFetchApi";
+import jwt_decode from "jwt-decode";
 
 export default () => {
   const useAuthToken = () => useState("auth_token");
   const useAuthUser = () => useState("auth_user");
+  const useAuthLoading = () => useState("auth_loading", () => true);
 
   const setToken = (newToken) => {
     const AuthToken = useAuthToken();
     AuthToken.value = newToken;
   };
+
   const setUser = (newUser) => {
     const authUser = useAuthUser();
     authUser.value = newUser;
   };
+
+  const setIsAuthLoading = (value) => {
+    const AuthLoading = useAuthLoading();
+    AuthLoading.value = value;
+  };
+
   const login = ({ username, password }) => {
     return new Promise(async (resolve, reject) => {
       try {
@@ -24,6 +33,7 @@ export default () => {
         });
         setToken(data.access_Token);
         setUser(data.user);
+        console.log(useAuthToken().value)
 
         resolve(true);
       } catch (error) {
@@ -54,21 +64,38 @@ export default () => {
       }
     });
   };
-    const initAuth = () => {
+
+  const reRefreshAccessToken = () => {
+    const authToken = useAuthToken();
+    if (!authToken) {
+      return;
+    }
+    const jwt = jwt_decode(authToken.value);
+
+    console.log(jwt);
+  }; 
+  const initAuth = () => {
     return new Promise(async (resolve, reject) => {
+      setIsAuthLoading(true);
       try {
+        
         await refreshToken();
+        reRefreshAccessToken();
         await getUser();
         resolve(true);
       } catch (error) {
+        console.log(error);
         reject(error);
+      } finally {
+        setIsAuthLoading(false);
       }
     });
   };
   return {
     login,
-    useAuthUser,
-    initAuth,
     useAuthToken,
+    useAuthUser,
+    useAuthLoading,
+    initAuth,
   };
 };

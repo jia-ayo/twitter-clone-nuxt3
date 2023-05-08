@@ -30,11 +30,11 @@ export default defineEventHandler(async (event) => {
     return {
       access_token: accessToken,
     };
-  } catch (error) {
+  } catch (error) { 
     return sendError(
       event,
       createError({
-        statusCode: 500,
+        statusCode: 500, 
         statusMessage: "something went wrong",
       })
     );
