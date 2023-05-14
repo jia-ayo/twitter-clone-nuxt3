@@ -45,7 +45,7 @@ export default () => {
     return new Promise(async (resolve, reject) => {
       try {
         const data = await $fetch("/api/auth/refresh");
-        setToken(data.access_Token);
+        setToken(data.access_token);
         resolve(true);
       } catch (error) {
         reject(error);
@@ -67,12 +67,17 @@ export default () => {
 
   const reRefreshAccessToken = () => {
     const authToken = useAuthToken();
-    if (!authToken) {
+    if (!authToken.value) {
       return;
     }
     const jwt = jwt_decode(authToken.value);
 
-    console.log(jwt);
+    const newRefreshTime = jwt.exp - 60000 
+
+    setTimeout(async () => {
+      await refreshToken()
+      reRefreshAccessToken()
+    }, newRefreshTime);
   }; 
   const initAuth = () => {
     return new Promise(async (resolve, reject) => {
@@ -80,8 +85,9 @@ export default () => {
       try {
         
         await refreshToken();
-        reRefreshAccessToken();
+        
         await getUser();
+        reRefreshAccessToken();
         resolve(true);
       } catch (error) {
         console.log(error);
