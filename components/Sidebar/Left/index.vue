@@ -10,7 +10,7 @@
         </div>
       </NuxtLink>
     </div>
-    <div class="mt-2 space-y-2 ">
+    <div class="mt-2 space-y-2">
       <SidebarLeftTab active>
         <template v-slot:icon>
           <HomeIcon />
@@ -25,7 +25,7 @@
       </SidebarLeftTab>
       <SidebarLeftTab>
         <template v-slot:icon>
-          <BellIcon/>
+          <BellIcon />
         </template>
         <template v-slot:name> Notifications </template>
       </SidebarLeftTab>
@@ -37,36 +37,39 @@
       </SidebarLeftTab>
       <SidebarLeftTab>
         <template v-slot:icon>
-          <BookmarkIcon/>
+          <BookmarkIcon />
         </template>
         <template v-slot:name> Bookmarks </template>
       </SidebarLeftTab>
       <SidebarLeftTab>
         <template v-slot:icon>
-          <DocumentTextIcon/>
+          <DocumentTextIcon />
         </template>
         <template v-slot:name> Lists </template>
       </SidebarLeftTab>
       <SidebarLeftTab>
         <template v-slot:icon>
-          <UserIcon/>
+          <UserIcon />
         </template>
         <template v-slot:name> Profile </template>
       </SidebarLeftTab>
       <SidebarLeftTab>
         <template v-slot:icon>
-          <DotsCircleHorizontalIcon/>
+          <DotsCircleHorizontalIcon />
         </template>
         <template v-slot:name> More </template>
       </SidebarLeftTab>
+      <div class="hidden xl:block">
+        <UiButton liquid size="lg">
+          <span class="font-bold">Tweet</span>
+        </UiButton>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import {
-  HomeIcon,
-} from "@heroicons/vue/solid";
+import { HomeIcon } from "@heroicons/vue/solid";
 import {
   HashtagIcon,
   BellIcon,
