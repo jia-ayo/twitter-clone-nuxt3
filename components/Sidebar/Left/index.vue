@@ -64,6 +64,13 @@
           <span class="font-bold">Tweet</span>
         </UiButton>
       </div>
+      <div class="clock xl:hidden">
+        <UiButton>
+          <div class="w-6 h-6 font-bold">
+            <PencilIcon />
+          </div>
+        </UiButton>
+      </div>
     </div>
   </div>
 </template>
@@ -78,6 +85,7 @@ import {
   DocumentTextIcon,
   UserIcon,
   DotsCircleHorizontalIcon,
+  PencilIcon,
 } from "@heroicons/vue/outline";
 const { defaultTransition } = useTailwindConfig();
 </script>
