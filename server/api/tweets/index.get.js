@@ -1,5 +1,19 @@
-export default defineEventHandler((event) => {
-    return {
-        h1: "hello"
-    }
-})
+import { getTweets } from "~/server/dp/tweets";
+import { tweetTransformer } from "~/server/transformers/tweet";
+
+export default defineEventHandler(async (event) => {
+  const tweets = await getTweets({
+    include: {
+      author: true,
+      mediaFiles: true,
+      replies: {
+        include: {
+          author: true,
+        },
+      },
+    },
+  });
+  return {
+    tweets: tweets.map(tweetTransformer),
+  };
+});

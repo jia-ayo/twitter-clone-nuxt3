@@ -12,7 +12,7 @@
         <textarea
           placeholder="what's happening?"
           v-model="text"
-          class="w-full h-10 text-lg text-gray-900 placeholder:text-gray-400 bg-transparent border-0 dark:text-white focus:ring-0"
+          class="w-full block overflow-hidden resize-y max-h-52 text-lg text-gray-900 placeholder:text-gray-400 bg-transparent border-0 dark:text-white focus:ring-0"
         ></textarea>
       </div>
     </div>
