@@ -3,7 +3,7 @@ export default () => {
     const form = new FormData();
 
     form.append("text", formData.text);
-    
+
     formData.mediaFiles.forEach((mediaFile, index) => {
       form.append("media_fil_" + index, mediaFile);
     });
@@ -12,7 +12,23 @@ export default () => {
       body: form,
     });
   };
+
+  const getHomeTweets = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await useFetchApi("/api/tweets", {
+          method: "GET",
+        });
+
+        resolve(response);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
   return {
     postTweet,
+    getHomeTweets,
   };
 };
