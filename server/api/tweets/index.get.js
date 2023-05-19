@@ -1,6 +1,7 @@
 import { getTweets } from "~/server/dp/tweets";
 import { tweetTransformer } from "~/server/transformers/tweet";
 
+
 export default defineEventHandler(async (event) => {
   const tweets = await getTweets({
     include: {
@@ -11,6 +12,14 @@ export default defineEventHandler(async (event) => {
           author: true,
         },
       },
+      replyTo: {
+        include: {
+          author: true,
+        },
+      },
+    },
+    orderBy: {
+      createAt: "desc",
     },
   });
   return {
