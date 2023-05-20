@@ -1,26 +1,30 @@
 <template>
   <div>
-    <div v-if="loading" class="flex items-center justify-center py-6 "> 
-        <UiSpinner/>
+    <div v-if="loading" class="flex items-center justify-center py-6">
+      <UiSpinner />
     </div>
     <div v-else>
-      <TweetFormInput :user="props.user" @onSubmit="handleFormSubmit" />
+      <TweetFormInput :placeholder="props.placeholder" :user="props.user" @onSubmit="handleFormSubmit" />
     </div>
   </div>
 </template>
 
 <script setup>
-const loading = ref(false)
+const loading = ref(false);
 const { postTweet } = useTweets();
 const props = defineProps({
   user: {
     type: Object,
     required: true,
   },
+  placeholder: {
+    type: String,
+    default: "what's happening?",
+  },
 });
 
 async function handleFormSubmit(data) {
-    loading.value = true
+  loading.value = true;
   try {
     const response = await postTweet({
       text: data.text,
@@ -30,7 +34,7 @@ async function handleFormSubmit(data) {
   } catch (error) {
     console.log(error);
   } finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 </script>
