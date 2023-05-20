@@ -2,6 +2,7 @@
   <div>
     <div class="pt-5 space-y-6">
       <UiInput
+        class="dark:placeholder:text-gray-300"
         label="Username"
         placeholder="@username"
         type="text"
@@ -9,13 +10,14 @@
       />
 
       <UiInput
+        class="dark:placeholder:text-gray-300"
         label="Password"
         placeholder="*******"
         type="password"
         v-model="data.password"
       />
       <div>
-        <button @click="handleLogin">Login</button>
+        <button class="dark:text-white" @click="handleLogin">Login</button>
       </div>
     </div>
   </div>
