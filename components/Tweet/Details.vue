@@ -1,7 +1,12 @@
 <template>
   <div>
     <TweetItem :tweet="props.tweet" />
-    <TweetForm placeholder="Tweet your reply" :user="props.user" />
+    <TweetForm
+      placeholder="Tweet your reply"
+      :replyTo="props.tweet"
+      :user="props.user"
+      @onSuccess="handleFormSuccess"
+    />
     <TweetListFeed :tweets="replies" />
   </div>
 </template>
@@ -19,4 +24,9 @@ const props = defineProps({
 });
 
 const replies = computed(() => props.tweet?.replies || []);
+function handleFormSuccess(tweet) {
+    navigateTo({
+        path: `/status/${tweet.id}`
+    })
+}
 </script>
