@@ -17,7 +17,7 @@
 
       <p v-if="props.tweet.replyTo" class="text-sm">
         <span class="text-gray-500"> Replying to </span>
-        <NuxtLink :to="replyToTweetUrl" class="text-blue-400">
+        <NuxtLink :to="replyToTweetUrl" class="cursor-pointer text-blue-400">
           {{ props.tweet.replyTo.author.handle }}
         </NuxtLink>
       </p>
@@ -34,7 +34,5 @@ const props = defineProps({
 });
 
 const author = props.tweet.author;
-const replyToTweetUrl = computed(() => {
-  `/status/${props.tweet?.replyTo.id}`;
-});
+const replyToTweetUrl = computed(() => `/status/${props.tweet?.replyTo.id}`);
 </script>

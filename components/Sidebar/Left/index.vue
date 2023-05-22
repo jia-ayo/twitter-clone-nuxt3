@@ -60,12 +60,12 @@
         <template v-slot:name> More </template>
       </SidebarLeftTab>
       <div class="hidden xl:block">
-        <UiButton liquid size="lg">
+        <UiButton liquid size="lg" @onClick="emits('onTweet')">
           <span class="font-bold">Tweet</span>
         </UiButton>
       </div>
       <div class="clock xl:hidden">
-        <UiButton>
+        <UiButton @onClick="emits('onTweet')">
           <div class="w-6 h-6 font-bold">
             <PencilIcon />
           </div>
@@ -88,4 +88,5 @@ import {
   PencilIcon,
 } from "@heroicons/vue/outline";
 const { defaultTransition } = useTailwindConfig();
+const emits = defineEmits(["onTweet"]);
 </script>

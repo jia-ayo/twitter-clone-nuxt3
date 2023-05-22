@@ -6,7 +6,7 @@
       </Head>
       <div class="border-b" :class="twitterBorderColor">
         <!-- {{ user }} -->
-        <TweetForm :user="user" />
+        <TweetForm :user="user" @onSuccess="handleFormSuccess"/>
       </div>
       <TweetListFeed :tweets="homeTweets" />
     </MainSection>
@@ -34,4 +34,11 @@ onBeforeMount(async () => {
     loading.value = false;
   }
 });
+
+function handleFormSuccess(tweet) {
+  navigateTo({
+    path : `/status/${tweet.id}`
+  })
+}
+
 </script>
