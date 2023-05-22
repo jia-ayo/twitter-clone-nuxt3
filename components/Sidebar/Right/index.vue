@@ -1,5 +1,21 @@
 <template>
   <div class="flex flex-col">
+    <!-- Search Bar -->
+    <div class="relative m-2">
+      <div
+        class="flex absolute p-2 item-center h-full pl-4 text-gray-600 cursor-pointer"
+      >
+        <div class="w-6 h-6">
+          <SearchIcon @click="handleSearch" />
+        </div>
+      </div>
+      <input
+        v-model="search"
+        class="flex items-center w-full pl-12 text-sm font-normal text-black dark:text-gray-100 bg-gray-200 border border-gray-200 rounded-full shadow dark:bg-dim-400 dark:border-dim-400 focus:bg-gray-100 dark:focus-dim-900 focus:outline-none focus:border focus:border-blue-200 h-9"
+        type="text"
+        placeholder="Search twitter"
+      />
+    </div>
     <!-- preview Card : what's happening -->
     <SidebarRightPreviewCard title="What's happening">
       <SidebarRightPreviewCardItem
@@ -44,6 +60,18 @@
 </template>
 
 <script setup>
+import { SearchIcon } from "@heroicons/vue/outline";
+const search = ref("");
+
+function handleSearch() {
+  useRouter().push({
+    path: "/search",
+    query: {
+      q: search.value,
+    },
+  });
+}
+
 const whatsHappeningItems = ref([
   {
     title: "Spacex",

@@ -6,7 +6,7 @@
       </Head>
       <div class="border-b" :class="twitterBorderColor">
         <!-- {{ user }} -->
-        <TweetForm :user="user" @onSuccess="handleFormSuccess"/>
+        <TweetForm :user="user" @onSuccess="handleFormSuccess" />
       </div>
       <TweetListFeed :tweets="homeTweets" />
     </MainSection>
@@ -15,7 +15,7 @@
 
 <script setup>
 const { twitterBorderColor } = useTailwindConfig();
-const { getHomeTweets } = useTweets();
+const { getTweets } = useTweets();
 
 const loading = ref(false);
 const homeTweets = ref([]);
@@ -26,7 +26,7 @@ const user = useAuthUser();
 onBeforeMount(async () => {
   loading.value = true;
   try {
-    const { tweets } = await getHomeTweets();
+    const { tweets } = await getTweets();
     homeTweets.value = tweets;
   } catch (error) {
     console.log(error);
@@ -37,8 +37,7 @@ onBeforeMount(async () => {
 
 function handleFormSuccess(tweet) {
   navigateTo({
-    path : `/status/${tweet.id}`
-  })
+    path: `/status/${tweet.id}`,
+  });
 }
-
 </script>
