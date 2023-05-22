@@ -63,8 +63,11 @@ onBeforeMount(() => {
   initAuth();
 });
 
-function handleFormSucess() {
+function handleFormSucess(tweet) {
   closePostTweetsModal();
+  navigateTo({
+    path: `/status/${tweet.id}`,
+  });
 }
 
 function handleModalClose() {

@@ -4,6 +4,11 @@
       <UiSpinner />
     </div>
     <div v-else>
+      <TweetItem
+        :tweet="props.replyTo"
+        v-if="props.replyTo && props.showReply"
+        hideActions
+      />
       <TweetFormInput
         :placeholder="props.placeholder"
         :user="props.user"
@@ -14,7 +19,7 @@
 </template>
 
 <script setup>
-const emits = defineEmits(["onSuccess"]) 
+const emits = defineEmits(["onSuccess"]);
 const loading = ref(false);
 const { postTweet } = useTweets();
 const props = defineProps({
@@ -30,6 +35,10 @@ const props = defineProps({
     type: Object,
     default: null,
   },
+  showReply: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 async function handleFormSubmit(data) {
@@ -38,9 +47,9 @@ async function handleFormSubmit(data) {
     const response = await postTweet({
       text: data.text,
       mediaFiles: data.mediaFiles,
-      replyTo : props.replyTo?.id
+      replyTo: props.replyTo?.id,
     });
-    emits("onSuccess", response.tweet)
+    emits("onSuccess", response.tweet);
   } catch (error) {
     console.log(error);
   } finally {
