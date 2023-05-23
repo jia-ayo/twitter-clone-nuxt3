@@ -1,11 +1,5 @@
 <template>
-  <div class="w-full">
-    <div class="flex justify-center">
-      <div class="w-10 h-10">
-<LogoTwitter/>
-      </div>
-
-    </div>
+  <div>
     <div class="pt-5 space-y-6">
       <UiInput
         class="dark:placeholder:text-gray-300"
@@ -22,9 +16,9 @@
         type="password"
         v-model="data.password"
       />
-      <UiButton @click="handleLogin" liquid :disabled="isButtonDisabled">
-        Login
-      </UiButton>
+      <div>
+        <button class="dark:text-white" @click="handleLogin">Login</button>
+      </div>
     </div>
   </div>
 </template>
@@ -49,8 +43,4 @@ async function handleLogin() {
     data.loading = false;
   }
 }
-
-const isButtonDisabled = computed(() => {
-  return !data.username || !data.password || data.loading;
-});
 </script>

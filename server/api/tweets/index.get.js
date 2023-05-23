@@ -1,10 +1,9 @@
 import { getTweets } from "~/server/dp/tweets";
 import { tweetTransformer } from "~/server/transformers/tweet";
 
-export default defineEventHandler(async (event) => {
-  const { query } = getQuery(event);
 
-  let prismaQuery = {
+export default defineEventHandler(async (event) => {
+  const tweets = await getTweets({
     include: {
       author: true,
       mediaFiles: true,
@@ -22,20 +21,7 @@ export default defineEventHandler(async (event) => {
     orderBy: {
       createAt: "desc",
     },
-  };
-
-  if (!!query) {
-    prismaQuery = {
-      ...prismaQuery,
-      where: {
-        text: {
-          contains: query,
-        },
-      },
-    };
-  }
-
-  const tweets = await getTweets(prismaQuery);
+  });
   return {
     tweets: tweets.map(tweetTransformer),
   };

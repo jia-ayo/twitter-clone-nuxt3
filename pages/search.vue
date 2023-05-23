@@ -5,7 +5,7 @@
         <title>Search</title>
       </Head>
 
-      <TweetListFeed :tweets="searchTweets" />
+      <TweetListFeed :tweets="[]" />
     </MainSection>
   </div>
 </template>
@@ -14,29 +14,21 @@
 const { getTweets } = useTweets();
 
 const loading = ref(false);
-const searchTweets = ref([]);
+const homeTweets = ref([]);
 const searchQuery = useRoute().query.q;
 
-watch(
-  () => useRoute().fullPath,
-  () => getTweet()
-);
-
-onBeforeMount(() => {
-  getTweet()
-});
-
-async function getTweet() {
-     loading.value = true;
+onBeforeMount(async () => {
+  console.log(searchQuery);
+  loading.value = true;
   try {
     const { tweets } = await getTweets({
       query: searchQuery,
     });
-    searchTweets.value = tweets;
+    homeTweets.value = tweets;
   } catch (error) {
     console.log(error);
   } finally {
     loading.value = false;
   }
-}
+});
 </script>
