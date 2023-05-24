@@ -7,7 +7,15 @@ export const createRefreshToken = (refreshToken) => {
 export const getRefreshTokenByToken = (token) => {
   return prisma.refreshToken.findUnique({
     where: {
-      token
-    }
-  })
-}
+      token,
+    },
+  });
+};
+
+export const removeRefreshtoken = (token) => {
+  return prisma.refreshToken.delete({
+    where: {
+      token: token,
+    },
+  });
+};

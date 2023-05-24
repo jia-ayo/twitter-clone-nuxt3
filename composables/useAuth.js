@@ -21,6 +21,28 @@ export default () => {
     AuthLoading.value = value;
   };
 
+  const register = ({ username, email, password, repeatPassword, name }) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const data = await $fetch("/api/auth/register", {
+          method: "POST",
+          body: {
+            username,
+            email,
+            password,
+            repeatPassword,
+            name,
+          },
+        });
+        setToken(data.access_Token);
+        setUser(data.user);
+        resolve(true)
+      } catch (error) {
+        reject(error)
+      }
+    });
+  };
+
   const login = ({ username, password }) => {
     return new Promise(async (resolve, reject) => {
       try {
@@ -33,7 +55,6 @@ export default () => {
         });
         setToken(data.access_Token);
         setUser(data.user);
-        console.log(useAuthToken().value)
 
         resolve(true);
       } catch (error) {
@@ -72,20 +93,19 @@ export default () => {
     }
     const jwt = jwt_decode(authToken.value);
 
-    const newRefreshTime = jwt.exp - 60000 
+    const newRefreshTime = jwt.exp - 60000;
 
     setTimeout(async () => {
-      await refreshToken()
-      reRefreshAccessToken()
+      await refreshToken();
+      reRefreshAccessToken();
     }, newRefreshTime);
-  }; 
+  };
   const initAuth = () => {
     return new Promise(async (resolve, reject) => {
       setIsAuthLoading(true);
       try {
-        
         await refreshToken();
-        
+
         await getUser();
         reRefreshAccessToken();
         resolve(true);
@@ -97,11 +117,30 @@ export default () => {
       }
     });
   };
+
+  const logout = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await useFetchApi("/api/auth/logout", {
+          method: "POST",
+        });
+
+        setToken(null);
+        setUser(null);
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
   return {
     login,
     useAuthToken,
     useAuthUser,
     useAuthLoading,
     initAuth,
+    register,
+    logout,
   };
 };
