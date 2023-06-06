@@ -4,6 +4,7 @@
     :disabled="props.disabled"
     :class="classes"
     @click="handleClick"
+    :type="props.type"
   >
     <span :class="textFontSize">
       <slot />
@@ -27,6 +28,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  type: {
+    type: String,
+    default: "button"
+  }
 });
 const textFontSize = computed(() => {
   switch (props.size) {

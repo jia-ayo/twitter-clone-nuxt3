@@ -1,54 +1,65 @@
 <template>
-  <div class="w-full">
+  <div class="w-full pt-10">
     <div class="flex justify-center">
       <div class="w-10 h-10">
         <LogoTwitter />
       </div>
     </div>
-    <div class="pt-5 space-y-6">
-      <UiInput
-        class="dark:placeholder:text-gray-300"
-        label="Name"
-        placeholder="Name"
-        type="text"
-        v-model="data.name"
-      />
-      <UiInput
-        class="dark:placeholder:text-gray-300"
-        label="Username"
-        placeholder="@username"
-        type="text"
-        v-model="data.username"
-      />
-      <UiInput
-        class="dark:placeholder:text-gray-300"
-        label="Email"
-        placeholder="Email"
-        type="email"
-        v-model="data.email"
-      />
-      <UiInput
-        class="dark:placeholder:text-gray-300"
-        label="Password"
-        placeholder="*******"
-        type="password"
-        v-model="data.password"
-      />
-      <UiInput
-        class="dark:placeholder:text-gray-300"
-        label="Reapet Password"
-        placeholder="*******"
-        type="password"
-        v-model="data.repeatPassword"
-      />
-      <UiButton @click="handleRegister" liquid :disabled="isButtonDisabled">
-        Register/Signup
-      </UiButton>
-    </div>
+    <form :onsubmit="onSubmit">
+      <div class="pt-5 space-y-3">
+        <UiInput
+          class="dark:placeholder:text-gray-300"
+          label="Name"
+          placeholder="Name"
+          type="text"
+          v-model="data.name"
+        />
+        <UiInput
+          class="dark:placeholder:text-gray-300"
+          label="Username"
+          placeholder="@username"
+          type="text"
+          v-model="data.username"
+        />
+        <UiInput
+          class="dark:placeholder:text-gray-300"
+          label="Email"
+          placeholder="Email"
+          type="email"
+          v-model="data.email"
+        />
+        <UiInput
+          class="dark:placeholder:text-gray-300"
+          label="Password"
+          placeholder="*******"
+          type="password"
+          v-model="data.password"
+        />
+        <UiInput
+          class="dark:placeholder:text-gray-300"
+          label="Reapet Password"
+          placeholder="*******"
+          type="password"
+          v-model="data.repeatPassword"
+        />
+        <p class="text-red-500" v-show="errorText">Email or Username already exist</p>
+        <UiButton
+          @click="handleRegister"
+          liquid
+          :disabled="isButtonDisabled"
+          type="submit"
+        >
+          Register/Signup
+        </UiButton>
+      </div>
+    </form>
+    <UiRegisteredModal v-show="showModal" />
   </div>
 </template>
 
 <script setup>
+let showModal = false;
+let errorText = false;
 const data = reactive({
   name: "",
   username: "",
@@ -68,14 +79,14 @@ async function handleRegister() {
       email: data.email,
       repeatPassword: data.repeatPassword,
     });
+    showModal = true;
   } catch (error) {
     console.log(error);
+    errorText = true;
   } finally {
     data.loading = false;
   }
 }
-
-
 
 const isButtonDisabled = computed(() => {
   return (
@@ -87,4 +98,8 @@ const isButtonDisabled = computed(() => {
     !data.name
   );
 });
+
+function onSubmit(event) {
+  event.preventDefault();
+}
 </script>

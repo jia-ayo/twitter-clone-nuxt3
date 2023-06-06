@@ -8,7 +8,7 @@
           class="grid grid-cols-12 mx-auto sm:px-6 lg:max-w-7xl lg:px-8 md:gap-3 lg:gap-9"
         >
           <!-- left  sidebar -->
-          <div class="hidden md:block xs-col-span-1 xl:col-span-2">
+          <div class="xs-col-span-1 xl:col-span-2">
             <div class="sticky top-0">
               <SidebarLeft
                 @onTweet="handleOpenTweetModal"
