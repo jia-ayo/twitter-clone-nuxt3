@@ -7,6 +7,7 @@
         <div
           class="grid grid-cols-12 mx-auto sm:px-2 lg:max-w-7xl lg:px-5 md:gap-3 lg:gap-6"
         >
+        
           <!-- left  sidebar -->
           <div class="hidden sm:block xs:col-span-1 xl:col-span-2">
             <div class="sticky top-0">
@@ -19,6 +20,7 @@
           </div>
           <!-- Main content -->
           <main class="col-span-12 md:col-span-8 xl:col-span-6">
+
             <RouterView />
           </main>
           <!-- right sidebar -->

@@ -1,10 +1,27 @@
 <template>
-  <div class=" border-x" :class="twitterBorderColor">
-    <div class="sticky top-0 px-4 py-3 bg-white/80 backdrop-blur-md dark:bg-dim-900/80">
-      <h2 class="text-lg font-bold text-gray-800 dark:text-gray-100">{{ props.title }}</h2>
+  <div class="border-x" :class="twitterBorderColor">
+    <div
+      class="sticky flex top-0 px-4 py-3  bg-white/80 backdrop-blur-md dark:bg-dim-900/80"
+    >
+      <div class="xs:block sm:hidden mt-1 mr-3 justify-center items-center">
+        <NuxtLink to="/">
+          <div class="w-6 h-6">
+            <LogoTwitter />
+          </div>
+        </NuxtLink>
+      </div>
+      <div>
+        <h2 class="text-lg font-bold text-gray-800 dark:text-gray-100">
+          {{ props.title }}
+        </h2>
+      </div>
     </div>
-    <div v-if="props.loading" class="flex items-center justify-center p-4 border-b" :class="twitterBorderColor"> 
-      <UiSpinner/>
+    <div
+      v-if="props.loading"
+      class="flex items-center justify-center p-4 border-b"
+      :class="twitterBorderColor"
+    >
+      <UiSpinner />
     </div>
     <div v-else>
       <slot> </slot>

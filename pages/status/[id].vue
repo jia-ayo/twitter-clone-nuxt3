@@ -1,9 +1,11 @@
 <template>
   <div>
+    
     <MainSection title="Tweet" :loading="loading">
       <Head>
         <title></title>
       </Head>
+      
       <TweetDetails :user="user" :tweet="tweet" />
     </MainSection>
   </div>
