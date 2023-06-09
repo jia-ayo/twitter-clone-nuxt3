@@ -5,10 +5,10 @@
     <div class="bg-white dark:bg-dim-900">
       <div v-if="user" class="min-h-full">
         <div
-          class="grid grid-cols-12 mx-auto sm:px-6 lg:max-w-7xl lg:px-8 md:gap-3 lg:gap-9"
+          class="grid grid-cols-12 mx-auto sm:px-2 lg:max-w-7xl lg:px-5 md:gap-3 lg:gap-6"
         >
           <!-- left  sidebar -->
-          <div class="xs-col-span-1 xl:col-span-2">
+          <div class="hidden sm:block xs:col-span-1 xl:col-span-2">
             <div class="sticky top-0">
               <SidebarLeft
                 @onTweet="handleOpenTweetModal"

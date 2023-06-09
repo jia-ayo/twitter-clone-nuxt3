@@ -10,7 +10,7 @@
         </div>
       </NuxtLink>
     </div>
-    <div class="mt-2 space-y-2">
+    <div class="my-2 space-y-2">
       <SidebarLeftTab active>
         <template v-slot:icon>
           <HomeIcon />
